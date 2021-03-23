@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body onload=test()>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
+
+<script>
+    var url =
+        'https://api.glasswall.advantest.com/spotfire/wp/render/2_Op3RslUC3w4gEc06/analysis?file=/Glasswall/glasswall_prod&waid=GsH49GqtkEadzLfo4Eok8-03115088deAKCV&wavid=0';
+    var aurl = 'https://api.glasswall.advantest.com/api/authcookie';
+
+    var token =
+        'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJUUTVNRFE1T0VWRFFUSXpNREJCTTBJeVEwWTROa0l3UVRCQk1UWkNNRFJCTnpnNU9FRTNNdyJ9.eyJpc3MiOiJodHRwczovL3NhbmRib3gubG9naW4uYWR2YW50ZXN0LmNvbS8iLCJzdWIiOiJ3YWFkfDAxTENDRDhITmkwcmVyQm5BRXZldURTdXR6WDJSQzFlLUNWdnY0U3VwbXMiLCJhdWQiOlsiaHR0cHM6Ly9nbGFzc3dhbGwuYWR2YW50ZXN0LmNvbS8iLCJodHRwczovL215YWR2YW50ZXN0LXNhbmRib3guZXUuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTYxNTI1ODg1MCwiZXhwIjoxNjE1MzQ1MjUwLCJhenAiOiJRblNpdnVhTllkY2lIbTRSYnhhc1FJSUZVeG5JY0xGbCIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwifQ.mKqK04q1RUxgElgILvuv-2obZocHRGxefA3eF7ukUkFT0WZ1x2ZzFsgXmgWtLYIkFraUMslJV2g54QqlJUD-zW1bpIHUHKwggcypIypyZokrFhefgKQ-IrPwpKyQlvfjSJ-G-oQEeT2tXNSkzunZEaAvYxg6veEPNkf6nJHD0Dvxa3XknKvb5RLvfOtNs9StTKa3tO2_RnLgIhiBAQNltfDas3da0e--mpzxm51k3L83yoC2V-gUM0yn7lA09Qos7opl-SgUwPdRWLgHILYZ-r876T0evbpde9iFO7eVhpZdzN6deevziQI6CAVycjP-whcyb9iYtLIEiyHucoJu7w'
+
+    $.ajax({
+        type: "GET",
+        url: 'http://localhost:3500/api/comm/setcookie',
+        data: {},
+        headers: {
+            Authorization: token
+            // AuthorizationCookie: token,
+            // origin: 'https://api.glasswall.advantest.com'
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res)
+        }
+    });
+
+    function test() {
+        var iframe = document.createElement('iframe');
+        iframe.id = 'testframe';
+        iframe.name = 'testframe';
+        iframe.src = url;
+        // iframe.srcdoc="<p>Hello world!</p>";
+        var fn = function () {
+            console.log('iframe loaded');
+        };
+        if (iframe.attachEvent) {
+            iframe.attachEvent('onload', fn);
+        } else {
+            iframe.onload = fn;
+        }
+        document.body.insertBefore(iframe, document.body.firstChild);
+    }
+</script>
+
+</html>
